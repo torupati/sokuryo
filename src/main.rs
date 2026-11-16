@@ -1,5 +1,6 @@
 mod models;
 mod handlers;
+mod stereo;
 
 use axum::{Router, routing::post};
 use handlers::coord::latlon_to_plane;
