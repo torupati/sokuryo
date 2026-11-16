@@ -1,6 +1,7 @@
 # 二重ステレオ投影（現場座標変換）仕様書
 
 EPSG Guidance Note 7-2 の Oblique Stereographic（method 9809）に、現場座標系への回転を加えたもの。
+出典は末尾の「参考文献」を参照。
 本書の式で書いた参照実装は、往復誤差 1e-12° 以下を確認済み。
 
 ## 1. 記号と単位
@@ -296,3 +297,16 @@ k0 = 1 − ρ² / (8 R²)
 
 - この投影は高さを入力に取らない（§1）。高さ補正は k0 を通じて、現場全体に一様にかかる。現場内の標高差が大きい場合は、k0 では吸収しきれない。
 - k0 は現場座標系のパラメータの一部として、座標値と一緒に記録しておくこと。
+
+## 参考文献
+
+- EPSG Registry: Coordinate Operation Method 9809, Oblique Stereographic
+  https://epsg.org/coord-operation-method_9809/Oblique-Stereographic.html
+- IOGP Geomatics Guidance Note 7, part 2: Coordinate Conversions and Transformations including Formulas
+  https://www.iogp.org/wp-content/uploads/2019/09/373-07-02.pdf
+  （Oblique Stereographic の式は、この文書の投影法の章にある。本書の §2〜§4 の式の元になっている）
+
+本書は上記の式に、次の2点を加えたもの。
+
+- 現場座標系への回転（§3, §4.1）
+- 逆変換の角度計算に atan2 を使うこと（§4.2）
